@@ -1,4 +1,4 @@
-## My Project
+## Full stack Recommendation engine 
 
 TODO: Fill this README out!
 
