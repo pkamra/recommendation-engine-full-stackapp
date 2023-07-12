@@ -7,7 +7,6 @@ Parameters:
   GitHubRepo:
     Type: String
     Description: URL of the GitHub repository to clone
-    Default: "https://github.com/pkamra/recommendation-engine-full-stack"
   SubnetId:
     Type: AWS::EC2::Subnet::Id
     Description: Subnet ID for the SageMaker domain
@@ -17,6 +16,9 @@ Parameters:
   KeyName:
     Type: AWS::EC2::KeyPair::KeyName
     Description: Key pair name for SSH access
+  ImageId:
+    Type: String
+    Description: Amazon Linux 2023 AMI for the correct region
 
 Resources:
   EC2Instance:
@@ -24,7 +26,7 @@ Resources:
     Properties:
       InstanceType: t2.micro
       SubnetId: !Ref SubnetId
-      ImageId: ami-03f38e546e3dc59e1
+      ImageId: !Ref ImageId
       SecurityGroupIds:
         - !Ref SecurityGroupId
       IamInstanceProfile: !Ref EC2InstanceProfile

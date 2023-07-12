@@ -6,7 +6,7 @@ Resources:
     Properties:
       CatalogId: !Ref AWS::AccountId
       DatabaseInput:
-        Name: default
+        Name: buildonaws
         Description: Default Database to hold data for the tutorial
 
 

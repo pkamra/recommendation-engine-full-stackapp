@@ -4,11 +4,11 @@ Parameters:
   S3BucketName:
     Type: String
     Description: Name of the S3 bucket to create where all data will be stored python notebooks 
-    Default: "myfamousbuildonawsbucket"
+    Default: ""
   SageMakerDomainName:
     Type: String
     Description: Name of the SageMaker domain to create
-    Default: "buildonaws-pk4"
+    Default: "buildonaws"
   GitHubRepo:
     Type: String
     Description: URL of the GitHub repository to clone
@@ -20,9 +20,22 @@ Parameters:
   VpcRegion:
     Type: String
     Description: AWS Region for VPC creation
-    Default: "us-east-2"
+    Default: "us-east-1"
+  ImageId:
+    Type: String
+    Description: Amazon Linux 2023 AMI for the correct region
+    Default: "ami-06ca3ca175f37dd66"
+  KeyName:
+    Type: String
+    Description: SSH Key Name for troubleshooting purpose
+    Default: ""
 
 Resources:
+  CodeS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+
   VPCStack:
     Type: AWS::CloudFormation::Stack
     Properties:
@@ -42,7 +55,8 @@ Resources:
         GitHubRepo: !Ref GitHubRepo
         SubnetId: !GetAtt VPCStack.Outputs.SubnetId
         SecurityGroupId: !GetAtt VPCStack.Outputs.SecurityGroupId
-        KeyName: piyali-isengard
+        KeyName: !Ref KeyName
+        ImageId: !Ref ImageId
 
   SageMakerStack:
     Type: AWS::CloudFormation::Stack
@@ -75,10 +89,15 @@ Resources:
       TemplateURL: glue-stack.yaml
 
 
-# Outputs:
-#   S3BucketNameOutput:
-#     Value: !Ref S3BucketName
-#     Description: Name of the created S3 bucket
-  # SageMakerUserProfileRoleOutput:
-  #   Value: !GetAtt SageMakerStack.Outputs.SageMakerUserProfileRoleOutput
-  #   Description: ARN of the IAM role associated with the SageMaker User Profile
+Outputs:
+  S3BucketNameOutput:
+    Value: !Ref S3BucketName
+    Description: Name of the created S3 bucket
+  SageMakerUserProfileRoleOutput:
+    Value: !GetAtt SageMakerStack.Outputs.SageMakerUserProfileRoleOutput
+    Description: ARN of the IAM role associated with the SageMaker User Profile
+  SageMakerDomainJupyterURLOutput:
+    Value: !GetAtt SageMakerStack.Outputs.SageMakerDomainJupyterURLOutput
+    Description: URL of the SageMaker Studio for accessing Jupyter notebooks
+
+

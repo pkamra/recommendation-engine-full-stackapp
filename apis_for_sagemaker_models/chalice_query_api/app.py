@@ -2,7 +2,7 @@ import os
 from chalice import Chalice
 # Environment Variables
 CLUSTERNO = 5
-DATABASE = 'default'
+DATABASE = 'buildonaws'
 # S3 Constant
 S3_OUTPUT = 's3://BUCKET_NAME/query-results/'
 # Number of Retries

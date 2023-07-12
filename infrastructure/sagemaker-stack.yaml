@@ -22,7 +22,6 @@ Resources:
 
   SageMakerDomain:
     Type: AWS::SageMaker::Domain
-    # DependsOn: CustomDeletionFunction
     Properties:
       DomainName: !Ref SageMakerDomainName
       AuthMode: IAM
@@ -34,7 +33,6 @@ Resources:
 
   SageMakerUserProfile:
     Type: AWS::SageMaker::UserProfile
-    # DependsOn: CustomDeletionFunction
     Properties:
       DomainId: !Ref SageMakerDomain
       UserProfileName: DefaultUserProfile
@@ -69,3 +67,9 @@ Outputs:
   SageMakerUserProfileRoleOutput:
     Value: !GetAtt SageMakerUserProfileRole.Arn
     Description: ARN of the IAM role associated with the SageMaker User Profile
+  SageMakerDomainIdOutput:
+    Value: !Ref SageMakerDomain
+    Description: ID of the SageMaker Domain
+  SageMakerDomainJupyterURLOutput:
+    Value: !Sub "https://${AWS::Region}.console.aws.amazon.com/sagemaker/home?region=${AWS::Region}#/studio/open/${SageMakerDomain}/defaultuserprofile"
+    Description: Jupyter URL of the SageMaker Domain
