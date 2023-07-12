@@ -12,7 +12,7 @@ Parameters:
   GitHubRepo:
     Type: String
     Description: URL of the GitHub repository to clone
-    Default: "https://github.com/pkamra/recommendation-engine-full-stack"
+    Default: "https://github.com/build-on-aws/recommendation-engine-full-stack"
   VpcStackName:
     Type: String
     Description: Name of the VPC stack
