@@ -1,7 +1,7 @@
 # Purpose of this API is to take in categories that you are interested in and then call the 2 sagemaker endpoints behind the scenes and return a cluster number
 
-- config.json shoudl look like this
-
+config.json should look like this
+```json
 {
   "version": "2.0",
   "app_name": "example-app",
@@ -13,3 +13,4 @@
     }
   }
 }
+```

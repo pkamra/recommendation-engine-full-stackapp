@@ -1,8 +1,8 @@
 # Purpose of this API is to return back the set of data (in this case movies) belonging to a specific cluster
 
+config.json should look like this
 
-- config.json should look like this
-
+```json
 {
   "version": "2.0",
   "app_name": "example-app",
@@ -14,5 +14,6 @@
     }
   }
 }
+```
 
 
